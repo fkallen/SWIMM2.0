@@ -241,12 +241,24 @@ void search_avx512bw_sp (char * query_sequences, unsigned short int * query_sequ
 			}
 
 			// store max value
-			#pragma unroll
-			for (i=0; i < 4; i++){
-				aux128 = _mm512_extracti32x4_epi32  (score, i);
-				aux1 = _mm512_add_epi32(_mm512_cvtepi8_epi32(aux128),v128);
-				_mm512_store_si512 (ptr_scores+i, aux1);
+			// #pragma unroll
+			// for (i=0; i < 4; i++){
+			// 	aux128 = _mm512_extracti32x4_epi32  (score, i);
+			// 	aux1 = _mm512_add_epi32(_mm512_cvtepi8_epi32(aux128),v128);
+			// 	_mm512_store_si512 (ptr_scores+i, aux1);
+			// }
+
+			#define STORE_MAX_VALUE(i){\
+				aux128 = _mm512_extracti32x4_epi32  (score, (i)); \
+				aux1 = _mm512_add_epi32(_mm512_cvtepi8_epi32(aux128),v128);\
+				_mm512_store_si512 (ptr_scores+(i), aux1);\
 			}
+
+			STORE_MAX_VALUE(0)
+			STORE_MAX_VALUE(1)
+			STORE_MAX_VALUE(2)
+			STORE_MAX_VALUE(3)
+			#undef STORE_MAX_VALUE
 			
 			// overflow detection
 			// low 
@@ -884,12 +896,24 @@ void search_avx512bw_qp (char * query_sequences, unsigned short int * query_sequ
 			}
 
 			// store max value
-			#pragma unroll
-			for (i=0; i < 4; i++){
-				aux128 = _mm512_extracti32x4_epi32  (score, i);
-				aux1 = _mm512_add_epi32(_mm512_cvtepi8_epi32(aux128),v128);
-				_mm512_store_si512 (ptr_scores+i, aux1);
+			// #pragma unroll
+			// for (i=0; i < 4; i++){
+			// 	aux128 = _mm512_extracti32x4_epi32  (score, i);
+			// 	aux1 = _mm512_add_epi32(_mm512_cvtepi8_epi32(aux128),v128);
+			// 	_mm512_store_si512 (ptr_scores+i, aux1);
+			// }
+
+			#define STORE_MAX_VALUE(i){\
+				aux128 = _mm512_extracti32x4_epi32  (score, (i)); \
+				aux1 = _mm512_add_epi32(_mm512_cvtepi8_epi32(aux128),v128);\
+				_mm512_store_si512 (ptr_scores+(i), aux1);\
 			}
+
+			STORE_MAX_VALUE(0)
+			STORE_MAX_VALUE(1)
+			STORE_MAX_VALUE(2)
+			STORE_MAX_VALUE(3)
+			#undef STORE_MAX_VALUE
 			
 			// overflow detection
 			// low 

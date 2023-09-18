@@ -119,7 +119,7 @@ int main(int argc, char *argv[]) {
 		for (i=0; i<query_sequences_count ; i++ ) {
 			memcpy(tmp_sequence_db_headers,sequence_db_headers,sequences_count*sizeof(char *));
 			sort_scores(scores+i*vect_db_sequences_count*vector_length,tmp_sequence_db_headers,sequences_count,threads);
-			printf("\nQuery no.\t\t\t%d\n",i+1);
+			printf("\nQuery no.\t\t\t%lu\n",i+1);
 			printf("Query description: \t\t%s\n",query_headers[i]+1);
 			printf("Query length:\t\t\t%d residues\n",query_sequences_lengths[i]);
 			printf("\nScore\tSequence description\n");

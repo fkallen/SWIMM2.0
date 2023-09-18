@@ -1,5 +1,5 @@
 #ifndef AVX2SEARCH_H_INCLUDED
-#define AVX2EARCH_H_INCLUDED
+#define AVX2SEARCH_H_INCLUDED
 
 #include <stdio.h>
 #include <stdlib.h>

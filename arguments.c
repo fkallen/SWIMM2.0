@@ -86,12 +86,12 @@ static int parse_opt (int key, char *arg, struct argp_state *state) {
 		case 'g':
 			open_gap = atoi(arg);
 			if ((open_gap < 0) || (open_gap > 127))
-				argp_failure (state, 1, 0, "%s is not a valid option for gap open penalty.",open_gap);
+				argp_failure (state, 1, 0, "%d is not a valid option for gap open penalty.",open_gap);
 			break;
 		case 'e':
 			extend_gap = atoi(arg);
 			if ((extend_gap < 0) || (extend_gap > 127))
-				argp_failure (state, 1, 0, "%s is not a valid option for gap extend penalty.",extend_gap);
+				argp_failure (state, 1, 0, "%d is not a valid option for gap extend penalty.",extend_gap);
 			break;
 		case 't':
 			threads = atoi(arg);
